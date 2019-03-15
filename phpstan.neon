@@ -1,0 +1,2 @@
+includes:
+    - vendor/brandembassy/coding-standard/default-phpstan.neon

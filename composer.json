@@ -1,0 +1,30 @@
+{
+  "name": "brandembassy/ui-components-table",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "BrandEmbassy\\": "src"
+    }
+  },
+  "require": {
+    "php": "~7.2",
+    "brandembassy/components": "dev-master",
+    "brandembassy/php-router": "1.0.0",
+    "guzzlehttp/psr7": "^1.5"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "brandembassy/coding-standard": "^5.2",
+    "phpunit/phpunit": "^8"
+  },
+  "scripts": {
+    "phpcs": "./vendor/bin/phpcs --standard=BrandEmbassyCodingStandard src",
+    "phpcbf": "./vendor/bin/phpcbf --standard=BrandEmbassyCodingStandard src",
+    "phpstan": "./vendor/bin/phpstan analyse src",
+    "test": "./vendor/bin/phpunit src"
+  },
+  "config": {
+    "sort-packages": true,
+    "process-timeout": 600
+  }
+}
