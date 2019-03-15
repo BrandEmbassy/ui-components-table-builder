@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace BE\UiComponent\Table;
+namespace BrandEmbassy\UiComponents\Table;
 
 use BrandEmbassy\Components\Align;
 use BrandEmbassy\Components\Controls\Link\Link;
@@ -17,10 +17,10 @@ use BrandEmbassy\Components\Table\Ui\Cell;
 use BrandEmbassy\Components\Table\Ui\Table;
 use BrandEmbassy\Components\UiComponent;
 use BrandEmbassy\Router\UrlGenerator;
+use function array_map;
 
 final class CrudTableComponentBuilder
 {
-
     private const DEFAULT_QUERY_KEY = 'id';
 
     /**
@@ -35,6 +35,7 @@ final class CrudTableComponentBuilder
 
     /**
      * @var (callable(string $rowIdentifier): Link)[]
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
      */
     private $linkFactories = [];
 
@@ -45,13 +46,16 @@ final class CrudTableComponentBuilder
 
     /**
      * @var (callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell)[]
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
      */
     private $cellRenderCallbacks = [];
+
 
     public function __construct(UrlGenerator $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }
+
 
     public function addColumn(ColumnDefinition $columnDefinition): self
     {
@@ -60,12 +64,14 @@ final class CrudTableComponentBuilder
         return $this;
     }
 
+
     public function addQueryParam(string $key, string $value): self
     {
         $this->queryParams[$key] = $value;
 
         return $this;
     }
+
 
     public function addEditLink(string $editRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY): self
     {
@@ -84,7 +90,8 @@ final class CrudTableComponentBuilder
         return $this;
     }
 
-    public function addDeleteLink(string $deleteRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY)
+
+    public function addDeleteLink(string $deleteRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY): self
     {
         $this->linkFactories[] = function (string $rowIdentifier) use ($deleteRoutePath, $keyQueryName): Link {
             $linkQueryParams = $this->queryParams;
@@ -102,6 +109,7 @@ final class CrudTableComponentBuilder
         return $this;
     }
 
+
     /**
      * @param callable(string $rowIdentifier, RowData $rowData): Link $linkFactory
      * @return CrudTableComponentBuilder
@@ -113,6 +121,7 @@ final class CrudTableComponentBuilder
         return $this;
     }
 
+
     public function build(DataProvider $tableDataProvider): Table
     {
         $this->columnDefinition['actions'] = new ColumnDefinition('actions', '', Align::get(Align::RIGHT));
@@ -123,7 +132,7 @@ final class CrudTableComponentBuilder
         $table->setCellRenderCallback(
             'actions',
             function (CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell {
-                $links = \array_map(
+                $links = array_map(
                     function (callable $linkFactory) use ($rowData): Link {
                         return $linkFactory($rowData->getRowIdentifier(), $rowData);
                     },
@@ -141,19 +150,21 @@ final class CrudTableComponentBuilder
         return $table;
     }
 
+
     // phpcs:disable
     /**
      * @param string $column
      * @param callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition, TableIterator $tableIterator): Cell $callback
      * @return self
      */
-    // phpcs:enable
     public function addCellRenderCallback(string $column, $callback): self
     {
         $this->cellRenderCallbacks[$column] = $callback;
 
         return $this;
     }
+    // phpcs:enable
+
 
     /**
      * @param callable(string $rowIdentifier): UriInterface $upUrlFactory
@@ -205,17 +216,15 @@ final class CrudTableComponentBuilder
         return $this;
     }
 
+
     private function createSpanner(): UiComponent
     {
         return new class implements UiComponent
         {
-
             public function render(): string
             {
                 return '<div style="display: inline-flex; width: 17px; height: 19px;">&nbsp;</div>';
             }
-
         };
     }
-
 }
