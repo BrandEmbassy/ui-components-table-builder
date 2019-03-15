@@ -1,5 +1,5 @@
 {
-  "name": "brandembassy/ui-components-table",
+  "name": "brandembassy/ui-components-table-builder",
   "license": "MIT",
   "autoload": {
     "psr-4": {
