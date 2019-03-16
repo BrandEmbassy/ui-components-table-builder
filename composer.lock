@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1061b42762ddd974acbb19d2812d6537",
+    "content-hash": "ee037e34c8eb6a6461005870f4944067",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -63,16 +63,16 @@
         },
         {
             "name": "brandembassy/components",
-            "version": "dev-master",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BrandEmbassy/components.git",
-                "reference": "a93cfdd6fe60f1ab869c3b3c826ef74d819432d1"
+                "url": "https://github.com/BrandEmbassy/ui-components.git",
+                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BrandEmbassy/components/zipball/a93cfdd6fe60f1ab869c3b3c826ef74d819432d1",
-                "reference": "a93cfdd6fe60f1ab869c3b3c826ef74d819432d1",
+                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/25e20319bce15f5b3a973d0a1af804020f83b395",
+                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395",
                 "shasum": ""
             },
             "require": {
@@ -83,9 +83,11 @@
                 "zendframework/zend-escaper": "^2.6"
             },
             "require-dev": {
+                "brandembassy/coding-standard": "^5.2",
                 "guzzlehttp/psr7": "^1.4",
-                "phpstan/phpstan": "^0.10.3",
-                "phpunit/phpunit": "^7.3"
+                "mockery/mockery": "^1.2",
+                "phpunit/phpunit": "^8",
+                "roave/security-advisories": "dev-master"
             },
             "type": "library",
             "autoload": {
@@ -97,7 +99,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-03-14T17:11:51+00:00"
+            "time": "2019-03-16T08:36:18+00:00"
         },
         {
             "name": "brandembassy/php-router",
@@ -3642,7 +3644,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "brandembassy/components": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
