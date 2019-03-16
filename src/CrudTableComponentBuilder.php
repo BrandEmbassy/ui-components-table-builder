@@ -34,7 +34,7 @@ final class CrudTableComponentBuilder
     private $columnDefinition = [];
 
     /**
-     * @var (callable(string $rowIdentifier): Link)[]
+     * @var           (callable(string $rowIdentifier): Link)[]
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
      */
     private $linkFactories = [];
@@ -45,15 +45,26 @@ final class CrudTableComponentBuilder
     private $queryParams = [];
 
     /**
-     * @var (callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell)[]
+     * @var           (callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell)[]
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
      */
     private $cellRenderCallbacks = [];
+
+    /**
+     * @var bool
+     */
+    private $hasHover = false;
 
 
     public function __construct(UrlGenerator $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
+    }
+
+
+    public function setHasHover(bool $hasHover): void
+    {
+        $this->hasHover = $hasHover;
     }
 
 
@@ -112,6 +123,7 @@ final class CrudTableComponentBuilder
 
     /**
      * @param callable(string $rowIdentifier, RowData $rowData): Link $linkFactory
+     *
      * @return CrudTableComponentBuilder
      */
     public function addLinkFactory(callable $linkFactory): self
@@ -122,11 +134,11 @@ final class CrudTableComponentBuilder
     }
 
 
-    public function build(DataProvider $tableDataProvider, bool $withHover = false): Table
+    public function build(DataProvider $tableDataProvider): Table
     {
         $this->columnDefinition['actions'] = new ColumnDefinition('actions', '', Align::get(Align::RIGHT));
 
-        $table = new Table(new TableDefinition($this->columnDefinition), $tableDataProvider, $withHover);
+        $table = new Table(new TableDefinition($this->columnDefinition), $tableDataProvider, $this->hasHover);
         $table->setColumnsNotInDataSet(['actions']);
 
         $table->setCellRenderCallback(
@@ -152,9 +164,12 @@ final class CrudTableComponentBuilder
 
 
     // phpcs:disable
+
+
     /**
      * @param string $column
      * @param callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition, TableIterator $tableIterator): Cell $callback
+     *
      * @return self
      */
     public function addCellRenderCallback(string $column, $callback): self
@@ -169,6 +184,7 @@ final class CrudTableComponentBuilder
     /**
      * @param callable(string $rowIdentifier): UriInterface $upUrlFactory
      * @param callable(string $rowIdentifier): UriInterface $downUrlFactory
+     *
      * @return CrudTableComponentBuilder
      */
     public function addSorting(callable $upUrlFactory, callable $downUrlFactory): self
