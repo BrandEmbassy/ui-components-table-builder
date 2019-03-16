@@ -122,11 +122,11 @@ final class CrudTableComponentBuilder
     }
 
 
-    public function build(DataProvider $tableDataProvider): Table
+    public function build(DataProvider $tableDataProvider, bool $withHover = false): Table
     {
         $this->columnDefinition['actions'] = new ColumnDefinition('actions', '', Align::get(Align::RIGHT));
 
-        $table = new Table(new TableDefinition($this->columnDefinition), $tableDataProvider);
+        $table = new Table(new TableDefinition($this->columnDefinition), $tableDataProvider, $withHover);
         $table->setColumnsNotInDataSet(['actions']);
 
         $table->setCellRenderCallback(
