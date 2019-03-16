@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee037e34c8eb6a6461005870f4944067",
+    "content-hash": "e76c59fc3d2b8ba97c3d9f82eb076bc4",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -62,46 +62,6 @@
             "time": "2018-12-24T15:25:25+00:00"
         },
         {
-            "name": "brandembassy/components",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BrandEmbassy/ui-components.git",
-                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/25e20319bce15f5b3a973d0a1af804020f83b395",
-                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395",
-                "shasum": ""
-            },
-            "require": {
-                "beberlei/assert": "^3.0",
-                "marc-mabe/php-enum": "^3.0",
-                "php": "~7.2",
-                "psr/http-message": "^1.0",
-                "zendframework/zend-escaper": "^2.6"
-            },
-            "require-dev": {
-                "brandembassy/coding-standard": "^5.2",
-                "guzzlehttp/psr7": "^1.4",
-                "mockery/mockery": "^1.2",
-                "phpunit/phpunit": "^8",
-                "roave/security-advisories": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BrandEmbassy\\Components\\": "src-php"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-03-16T08:36:18+00:00"
-        },
-        {
             "name": "brandembassy/php-router",
             "version": "1.0.0",
             "source": {
@@ -142,6 +102,46 @@
                 "MIT"
             ],
             "time": "2019-03-15T17:07:53+00:00"
+        },
+        {
+            "name": "brandembassy/ui-components",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BrandEmbassy/ui-components.git",
+                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/25e20319bce15f5b3a973d0a1af804020f83b395",
+                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "^3.0",
+                "marc-mabe/php-enum": "^3.0",
+                "php": "~7.2",
+                "psr/http-message": "^1.0",
+                "zendframework/zend-escaper": "^2.6"
+            },
+            "require-dev": {
+                "brandembassy/coding-standard": "^5.2",
+                "guzzlehttp/psr7": "^1.4",
+                "mockery/mockery": "^1.2",
+                "phpunit/phpunit": "^8",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BrandEmbassy\\Components\\": "src-php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2019-03-16T08:36:18+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -458,6 +458,46 @@
             ],
             "description": "Brand Embassy Coding Standard",
             "time": "2019-02-21T21:54:12+00:00"
+        },
+        {
+            "name": "brandembassy/components",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BrandEmbassy/ui-components.git",
+                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/25e20319bce15f5b3a973d0a1af804020f83b395",
+                "reference": "25e20319bce15f5b3a973d0a1af804020f83b395",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "^3.0",
+                "marc-mabe/php-enum": "^3.0",
+                "php": "~7.2",
+                "psr/http-message": "^1.0",
+                "zendframework/zend-escaper": "^2.6"
+            },
+            "require-dev": {
+                "brandembassy/coding-standard": "^5.2",
+                "guzzlehttp/psr7": "^1.4",
+                "mockery/mockery": "^1.2",
+                "phpunit/phpunit": "^8",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BrandEmbassy\\Components\\": "src-php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2019-03-16T08:36:18+00:00"
         },
         {
             "name": "composer/xdebug-handler",

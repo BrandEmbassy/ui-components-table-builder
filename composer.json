@@ -8,8 +8,8 @@
   },
   "require": {
     "php": "~7.2",
-    "brandembassy/components": "2.2.0",
     "brandembassy/php-router": "1.0.0",
+    "brandembassy/ui-components": "^2.2",
     "guzzlehttp/psr7": "^1.5"
   },
   "require-dev": {
