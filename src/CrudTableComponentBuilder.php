@@ -34,7 +34,7 @@ final class CrudTableComponentBuilder
     private $columnDefinition = [];
 
     /**
-     * @var           (callable(string $rowIdentifier): Link)[]
+     * @var (callable(string $rowIdentifier): Link)[]
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
      */
     private $linkFactories = [];
@@ -45,7 +45,7 @@ final class CrudTableComponentBuilder
     private $queryParams = [];
 
     /**
-     * @var           (callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell)[]
+     * @var (callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell)[]
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
      */
     private $cellRenderCallbacks = [];
