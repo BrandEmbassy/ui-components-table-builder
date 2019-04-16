@@ -55,6 +55,11 @@ final class CrudTableComponentBuilder
      */
     private $hasHover = false;
 
+    /**
+     * @var UiComponent|null
+     */
+    private $emptyTableComponent;
+
 
     public function __construct(UrlGenerator $urlGenerator)
     {
@@ -65,6 +70,12 @@ final class CrudTableComponentBuilder
     public function setHasHover(bool $hasHover): void
     {
         $this->hasHover = $hasHover;
+    }
+
+
+    public function setEmptyTableComponent(UiComponent $emptyTableComponent): void
+    {
+        $this->emptyTableComponent = $emptyTableComponent;
     }
 
 
@@ -134,8 +145,14 @@ final class CrudTableComponentBuilder
     }
 
 
-    public function build(DataProvider $tableDataProvider): Table
+    public function build(DataProvider $tableDataProvider): UiComponent
     {
+        $tableIsEmpty = $tableDataProvider->count() === 0;
+        $emptyTableComponentIsSet = $this->emptyTableComponent !== null;
+        if ($tableIsEmpty && $emptyTableComponentIsSet) {
+            return $this->emptyTableComponent;
+        }
+
         $this->columnDefinition['actions'] = new ColumnDefinition('actions', '', Align::get(Align::RIGHT));
 
         $table = new Table(new TableDefinition($this->columnDefinition), $tableDataProvider, $this->hasHover);
@@ -145,7 +162,7 @@ final class CrudTableComponentBuilder
             'actions',
             function (CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell {
                 $links = array_map(
-                    function (callable $linkFactory) use ($rowData): Link {
+                    static function (callable $linkFactory) use ($rowData): Link {
                         return $linkFactory($rowData->getRowIdentifier(), $rowData);
                     },
                     $this->linkFactories

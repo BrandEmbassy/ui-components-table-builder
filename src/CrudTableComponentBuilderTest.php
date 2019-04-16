@@ -3,6 +3,7 @@
 namespace BrandEmbassy\UiComponents\Table;
 
 use BrandEmbassy\Components\Controls\Link\Link;
+use BrandEmbassy\Components\NonIdealState\NonIdealState;
 use BrandEmbassy\Components\SnapshotAssertTrait;
 use BrandEmbassy\Components\Table\Model\ArrayDataProvider;
 use BrandEmbassy\Components\Table\Model\CellData;
@@ -53,6 +54,37 @@ final class CrudTableComponentBuilderTest extends TestCase
         $table = $builder->build($dataProvider);
 
         $this->assertSnapshot(__DIR__ . '/__snapshot__/render.html', $table);
+    }
+
+
+    public function testRenderingEmptyTable(): void
+    {
+        $urlGenerator = $this->createUrlGeneratorMock();
+
+        $builder = new CrudTableComponentBuilder($urlGenerator);
+        $builder->addColumn(new ColumnDefinition('yolo', 'Yolo'));
+
+        $dataProvider = new ArrayDataProvider([]);
+
+        $table = $builder->build($dataProvider);
+
+        $this->assertSnapshot(__DIR__ . '/__snapshot__/emptyTable.html', $table);
+    }
+
+
+    public function testRenderingEmptyTableWithEmptyTableComponentSet(): void
+    {
+        $urlGenerator = $this->createUrlGeneratorMock();
+
+        $builder = new CrudTableComponentBuilder($urlGenerator);
+        $builder->addColumn(new ColumnDefinition('yolo', 'Yolo'));
+        $builder->setEmptyTableComponent(new Paragraph('Empty table'));
+
+        $dataProvider = new ArrayDataProvider([]);
+
+        $table = $builder->build($dataProvider);
+
+        $this->assertSnapshot(__DIR__ . '/__snapshot__/emptyTableWithEmptyTableComponentSet.html', $table);
     }
 
 
