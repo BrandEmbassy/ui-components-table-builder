@@ -3,7 +3,6 @@
 namespace BrandEmbassy\UiComponents\Table;
 
 use BrandEmbassy\Components\Controls\Link\Link;
-use BrandEmbassy\Components\NonIdealState\NonIdealState;
 use BrandEmbassy\Components\SnapshotAssertTrait;
 use BrandEmbassy\Components\Table\Model\ArrayDataProvider;
 use BrandEmbassy\Components\Table\Model\CellData;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e76c59fc3d2b8ba97c3d9f82eb076bc4",
+    "content-hash": "7f96c4f3791b9da86a265380fd20ce09",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -105,16 +105,16 @@
         },
         {
             "name": "brandembassy/ui-components",
-            "version": "2.4",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BrandEmbassy/ui-components.git",
-                "reference": "a4021d69a697ab6320aaa32d1eea7096826b4b8c"
+                "reference": "280f275329ffc0944f13d84cf87eec306914f494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/a4021d69a697ab6320aaa32d1eea7096826b4b8c",
-                "reference": "a4021d69a697ab6320aaa32d1eea7096826b4b8c",
+                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/280f275329ffc0944f13d84cf87eec306914f494",
+                "reference": "280f275329ffc0944f13d84cf87eec306914f494",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +141,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-03-16T14:49:52+00:00"
+            "time": "2019-04-30T09:17:23+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
