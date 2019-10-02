@@ -17,7 +17,6 @@ use BrandEmbassy\Components\Table\Ui\Cell;
 use BrandEmbassy\Components\Table\Ui\Table;
 use BrandEmbassy\Components\UiComponent;
 use BrandEmbassy\Router\UrlGenerator;
-use function array_map;
 
 final class CrudTableComponentBuilder
 {
@@ -161,8 +160,8 @@ final class CrudTableComponentBuilder
         $table->setCellRenderCallback(
             'actions',
             function (CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell {
-                $links = array_map(
-                    static function (callable $linkFactory) use ($rowData): Link {
+                $links = \array_map(
+                    static function (callable $linkFactory) use ($rowData): UiComponent {
                         return $linkFactory($rowData->getRowIdentifier(), $rowData);
                     },
                     $this->linkFactories
@@ -179,9 +178,7 @@ final class CrudTableComponentBuilder
         return $table;
     }
 
-
     // phpcs:disable
-
 
     /**
      * @param string $column
