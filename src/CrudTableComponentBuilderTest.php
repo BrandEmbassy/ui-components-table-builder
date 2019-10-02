@@ -3,6 +3,7 @@
 namespace BrandEmbassy\UiComponents\Table;
 
 use BrandEmbassy\Components\Controls\Link\Link;
+use BrandEmbassy\Components\EmptyComponent;
 use BrandEmbassy\Components\SnapshotAssertTrait;
 use BrandEmbassy\Components\Table\Model\ArrayDataProvider;
 use BrandEmbassy\Components\Table\Model\CellData;
@@ -11,6 +12,7 @@ use BrandEmbassy\Components\Table\Model\RowData;
 use BrandEmbassy\Components\Table\Model\TableIterator;
 use BrandEmbassy\Components\Table\Ui\Cell;
 use BrandEmbassy\Components\Typography\Paragraph;
+use BrandEmbassy\Components\UiComponent;
 use BrandEmbassy\Router\UrlGenerator;
 use GuzzleHttp\Psr7\Uri;
 use Mockery;
@@ -30,7 +32,7 @@ final class CrudTableComponentBuilderTest extends TestCase
         $builder->addColumn(new ColumnDefinition('yolo', 'Yolo'))
             ->addCellRenderCallback(
                 'name',
-                function (
+                static function (
                     CellData $cellData,
                     RowData $rowData,
                     ColumnDefinition $columnDefinition,
@@ -40,8 +42,13 @@ final class CrudTableComponentBuilderTest extends TestCase
                 }
             )
             ->addLinkFactory(
-                function (string $rowIdentifier, RowData $rowData): Link {
+                static function (string $rowIdentifier, RowData $rowData): UiComponent {
                     return new Link('Link Text', new Uri('https://google.com'));
+                }
+            )
+            ->addLinkFactory(
+                static function (string $rowIdentifier, RowData $rowData): UiComponent {
+                    return new EmptyComponent();
                 }
             )
             ->addDeleteLink('deleteLink')
