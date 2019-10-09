@@ -105,16 +105,16 @@
         },
         {
             "name": "brandembassy/ui-components",
-            "version": "3.0.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BrandEmbassy/ui-components.git",
-                "reference": "280f275329ffc0944f13d84cf87eec306914f494"
+                "reference": "b2797f3c6809051e96fee6ae78643aea1087b706"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/280f275329ffc0944f13d84cf87eec306914f494",
-                "reference": "280f275329ffc0944f13d84cf87eec306914f494",
+                "url": "https://api.github.com/repos/BrandEmbassy/ui-components/zipball/b2797f3c6809051e96fee6ae78643aea1087b706",
+                "reference": "b2797f3c6809051e96fee6ae78643aea1087b706",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "zendframework/zend-escaper": "^2.6"
             },
             "require-dev": {
-                "brandembassy/coding-standard": "^5.2",
+                "brandembassy/coding-standard": "^6.0",
                 "guzzlehttp/psr7": "^1.4",
                 "mockery/mockery": "^1.2",
                 "phpunit/phpunit": "^8",
@@ -141,7 +141,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-04-30T09:17:23+00:00"
+            "time": "2019-10-09T10:49:14+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
