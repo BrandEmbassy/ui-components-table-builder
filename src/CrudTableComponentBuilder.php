@@ -178,6 +178,7 @@ final class CrudTableComponentBuilder
         return $table;
     }
 
+
     // phpcs:disable
 
     /**

@@ -19,8 +19,8 @@
     "roave/security-advisories": "dev-master"
   },
   "scripts": {
-    "phpcs": "./vendor/bin/phpcs --standard=BrandEmbassyCodingStandard src",
-    "phpcbf": "./vendor/bin/phpcbf --standard=BrandEmbassyCodingStandard src",
+    "phpcs": "./vendor/bin/phpcs --standard=ruleset.xml src",
+    "phpcbf": "./vendor/bin/phpcbf --standard=ruleset.xml src",
     "phpstan": "./vendor/bin/phpstan analyse src",
     "test": "./vendor/bin/phpunit src"
   },
