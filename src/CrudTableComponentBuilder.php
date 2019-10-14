@@ -13,6 +13,7 @@ use BrandEmbassy\Components\Table\Model\DataProvider;
 use BrandEmbassy\Components\Table\Model\RowData;
 use BrandEmbassy\Components\Table\Model\TableDefinition;
 use BrandEmbassy\Components\Table\Model\TableIterator;
+use BrandEmbassy\Components\Table\Model\TableRowDivider;
 use BrandEmbassy\Components\Table\Ui\Cell;
 use BrandEmbassy\Components\Table\Ui\Table;
 use BrandEmbassy\Components\UiComponent;
@@ -59,6 +60,11 @@ final class CrudTableComponentBuilder
      */
     private $emptyTableComponent;
 
+    /**
+     * @var TableRowDivider|null
+     */
+    private $tableRowDivider;
+
 
     public function __construct(UrlGenerator $urlGenerator)
     {
@@ -69,6 +75,14 @@ final class CrudTableComponentBuilder
     public function setHasHover(bool $hasHover): void
     {
         $this->hasHover = $hasHover;
+    }
+
+
+    public function setTableRowDivider(TableRowDivider $tableRowDivider): self
+    {
+        $this->tableRowDivider = $tableRowDivider;
+
+        return $this;
     }
 
 
@@ -154,7 +168,11 @@ final class CrudTableComponentBuilder
 
         $this->columnDefinition['actions'] = new ColumnDefinition('actions', '', Align::get(Align::RIGHT));
 
-        $table = new Table(new TableDefinition($this->columnDefinition), $tableDataProvider, $this->hasHover);
+        $tableDefinition = new TableDefinition($this->columnDefinition);
+        if ($this->tableRowDivider !== NULL) {
+            $tableDefinition->setRowDivider($this->tableRowDivider);
+        }
+        $table = new Table($tableDefinition, $tableDataProvider, $this->hasHover);
         $table->setColumnsNotInDataSet(['actions']);
 
         $table->setCellRenderCallback(
