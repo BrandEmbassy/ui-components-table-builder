@@ -78,7 +78,7 @@ final class CrudTableComponentBuilder
     }
 
 
-    public function setTableRowDivider(?TableRowDivider $tableRowDivider): self
+    public function setTableRowDivider(TableRowDivider $tableRowDivider): self
     {
         $this->tableRowDivider = $tableRowDivider;
 
