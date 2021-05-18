@@ -18,6 +18,12 @@
     "phpunit/phpunit": "^8",
     "roave/security-advisories": "dev-master"
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/BrandEmbassy/ui-components-table-builder"
+    }
+  ],
   "scripts": {
     "phpcs": "./vendor/bin/phpcs --standard=ruleset.xml src",
     "phpcbf": "./vendor/bin/phpcbf --standard=ruleset.xml src",
