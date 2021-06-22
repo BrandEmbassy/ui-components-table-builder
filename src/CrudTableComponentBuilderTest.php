@@ -98,12 +98,9 @@ final class CrudTableComponentBuilderTest extends TestCase
 
     /**
      * @dataProvider getPagesDataProvider
-     *
-     * @param RowData[] $rowsData
      */
     public function testSortingOfPaginatedTables(
         string $expectedSnapshot,
-        array $rowsData,
         bool $isFirstPage,
         bool $isLastPage
     ): void {
@@ -118,6 +115,8 @@ final class CrudTableComponentBuilderTest extends TestCase
             $isFirstPage,
             $isLastPage
         );
+
+        $rowsData = $this->getRowsDataForSorting();
 
         $dataProvider = new ArrayDataProvider($rowsData);
 
@@ -135,85 +134,16 @@ final class CrudTableComponentBuilderTest extends TestCase
         return [
             'single page' => [
                 'expectedSnapshot' => 'paginationSinglePage.html',
-                'rowsData'         => [
-                    new RowData(
-                        '1',
-                        [
-                            'yolo'  => new CellData('row1', 'foo-bar-baz-1'),
-                            'order' => new CellData('order', 1),
-                        ]
-                    ),
-                    new RowData(
-                        '2',
-                        [
-                            'yolo'  => new CellData('row2', 'foo-bar-baz-2'),
-                            'order' => new CellData('order', 2),
-                        ]
-                    ),
-                    new RowData(
-                        '3',
-                        [
-                            'yolo'  => new CellData('row3', 'foo-bar-baz-3'),
-                            'order' => new CellData('order', 3),
-                        ]
-                    ),
-                ],
                 'isFirstPage'      => true,
                 'isLastPage'       => true,
             ],
             'Middle page' => [
                 'expectedSnapshot' => 'paginationMiddlePage.html',
-                'rowsData'         => [
-                    new RowData(
-                        '1',
-                        [
-                            'yolo'  => new CellData('row1', 'foo-bar-baz-1'),
-                            'order' => new CellData('order', 1),
-                        ]
-                    ),
-                    new RowData(
-                        '2',
-                        [
-                            'yolo'  => new CellData('row2', 'foo-bar-baz-2'),
-                            'order' => new CellData('order', 2),
-                        ]
-                    ),
-                    new RowData(
-                        '3',
-                        [
-                            'yolo'  => new CellData('row3', 'foo-bar-baz-3'),
-                            'order' => new CellData('order', 3),
-                        ]
-                    ),
-                ],
                 'isFirstPage'      => false,
                 'isLastPage'       => false,
             ],
             'Last page'   => [
                 'expectedSnapshot' => 'paginationLastPage.html',
-                'rowsData'         => [
-                    new RowData(
-                        '1',
-                        [
-                            'yolo'  => new CellData('row1', 'foo-bar-baz-1'),
-                            'order' => new CellData('order', 1),
-                        ]
-                    ),
-                    new RowData(
-                        '2',
-                        [
-                            'yolo'  => new CellData('row2', 'foo-bar-baz-2'),
-                            'order' => new CellData('order', 2),
-                        ]
-                    ),
-                    new RowData(
-                        '3',
-                        [
-                            'yolo'  => new CellData('row3', 'foo-bar-baz-3'),
-                            'order' => new CellData('order', 3),
-                        ]
-                    ),
-                ],
                 'isFirstPage'      => false,
                 'isLastPage'       => true,
             ],
@@ -226,6 +156,37 @@ final class CrudTableComponentBuilderTest extends TestCase
         return static function (string $rowIdentifier) use ($direction): UriInterface {
             return new Uri(sprintf('someUrl/%s/direction/%d', $rowIdentifier, $direction));
         };
+    }
+
+
+    /**
+     * @return RowData[]
+     */
+    private function getRowsDataForSorting(): array
+    {
+        return [
+            new RowData(
+                '1',
+                [
+                    'yolo'  => new CellData('row1', 'foo-bar-baz-1'),
+                    'order' => new CellData('order', 1),
+                ]
+            ),
+            new RowData(
+                '2',
+                [
+                    'yolo'  => new CellData('row2', 'foo-bar-baz-2'),
+                    'order' => new CellData('order', 2),
+                ]
+            ),
+            new RowData(
+                '3',
+                [
+                    'yolo'  => new CellData('row3', 'foo-bar-baz-3'),
+                    'order' => new CellData('order', 3),
+                ]
+            ),
+        ];
     }
 
 
