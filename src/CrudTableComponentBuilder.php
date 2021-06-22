@@ -146,7 +146,7 @@ final class CrudTableComponentBuilder
 
 
     /**
-     * @param callable(string $rowIdentifier, RowData $rowData): UiComponent $linkFactory
+     * @param callable(string $rowIdentifier, RowData $rowData): Link $linkFactory
      *
      * @return CrudTableComponentBuilder
      */
@@ -215,8 +215,8 @@ final class CrudTableComponentBuilder
 
 
     /**
-     * @param callable $upUrlFactory
-     * @param callable $downUrlFactory
+     * @param callable(string $rowIdentifier): UriInterface $upUrlFactory
+     * @param callable(string $rowIdentifier): UriInterface $downUrlFactory
      * @param bool $isFirstPage
      * @param bool $isLastPage
      *
