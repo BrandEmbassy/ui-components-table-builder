@@ -146,7 +146,7 @@ final class CrudTableComponentBuilder
 
 
     /**
-     * @param callable(string $rowIdentifier, RowData $rowData): Link $linkFactory
+     * @param callable(string $rowIdentifier, RowData $rowData): UiComponent $linkFactory
      *
      * @return CrudTableComponentBuilder
      */
