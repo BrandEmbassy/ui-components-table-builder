@@ -217,11 +217,17 @@ final class CrudTableComponentBuilder
     /**
      * @param callable(string $rowIdentifier): UriInterface $upUrlFactory
      * @param callable(string $rowIdentifier): UriInterface $downUrlFactory
+     * @param bool $isFirstPage
+     * @param bool $isLastPage
      *
      * @return CrudTableComponentBuilder
      */
-    public function addSorting(callable $upUrlFactory, callable $downUrlFactory): self
-    {
+    public function addSorting(
+        callable $upUrlFactory,
+        callable $downUrlFactory,
+        bool $isFirstPage = true,
+        bool $isLastPage = true
+    ): self {
         $this->addCellRenderCallback(
             'order',
             function (
@@ -231,14 +237,16 @@ final class CrudTableComponentBuilder
                 TableIterator $tableIterator
             ) use (
                 $upUrlFactory,
-                $downUrlFactory
+                $downUrlFactory,
+                $isFirstPage,
+                $isLastPage
             ): Cell {
                 $rowIdentifier = $rowData->getRowIdentifier();
                 $upUrl = $upUrlFactory($rowIdentifier);
                 $downUrl = $downUrlFactory($rowIdentifier);
 
                 $children = [];
-                if (!$tableIterator->isFirst()) {
+                if (!$tableIterator->isFirst() || !$isFirstPage) {
                     $children[] = new Link(
                         '',
                         $upUrl,
@@ -249,7 +257,7 @@ final class CrudTableComponentBuilder
                     $children[] = $this->createSpanner();
                 }
 
-                if (!$tableIterator->isLast()) {
+            if (!$tableIterator->isLast() || !$isLastPage) {
                     $children[] = new Link(
                         '',
                         $downUrl,
