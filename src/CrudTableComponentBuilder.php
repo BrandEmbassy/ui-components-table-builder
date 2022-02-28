@@ -18,6 +18,7 @@ use BrandEmbassy\Components\Table\Ui\Cell;
 use BrandEmbassy\Components\Table\Ui\Table;
 use BrandEmbassy\Components\UiComponent;
 use BrandEmbassy\Router\UrlGenerator;
+use function assert;
 
 /**
  * @final
@@ -34,7 +35,7 @@ class CrudTableComponentBuilder
     private array $columnDefinition = [];
 
     /**
-     * @var array<callable(string $rowIdentifier): Link>
+     * @var array<callable(string $rowIdentifier, RowData $rowData): Link>
      */
     private array $linkFactories = [];
 
@@ -134,11 +135,6 @@ class CrudTableComponentBuilder
     }
 
 
-    /**
-     * @param callable(string $rowIdentifier, RowData $rowData): Link $linkFactory
-     *
-     * @return CrudTableComponentBuilder
-     */
     public function addLinkFactory(callable $linkFactory): self
     {
         $this->linkFactories[] = $linkFactory;
@@ -152,6 +148,8 @@ class CrudTableComponentBuilder
         $tableIsEmpty = $tableDataProvider->count() === 0;
         $emptyTableComponentIsSet = $this->emptyTableComponent !== null;
         if ($tableIsEmpty && $emptyTableComponentIsSet) {
+            assert($this->emptyTableComponent !== null);
+
             return $this->emptyTableComponent;
         }
 
@@ -186,29 +184,14 @@ class CrudTableComponentBuilder
     }
 
 
-    // phpcs:disable
-
-    /**
-     * @param string $column
-     * @param callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition, TableIterator $tableIterator): Cell $callback
-     *
-     * @return self
-     */
-    public function addCellRenderCallback(string $column, $callback): self
+    public function addCellRenderCallback(string $column, callable $callback): self
     {
         $this->cellRenderCallbacks[$column] = $callback;
 
         return $this;
     }
-    // phpcs:enable
 
 
-    /**
-     * @param callable(string $rowIdentifier): UriInterface $upUrlFactory
-     * @param callable(string $rowIdentifier): UriInterface $downUrlFactory
-     *
-     * @return CrudTableComponentBuilder
-     */
     public function addSorting(
         callable $upUrlFactory,
         callable $downUrlFactory,
