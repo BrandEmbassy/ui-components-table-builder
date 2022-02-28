@@ -21,7 +21,10 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use function sprintf;
 
-final class CrudTableComponentBuilderTest extends TestCase
+/**
+ * @final
+ */
+class CrudTableComponentBuilderTest extends TestCase
 {
     use SnapshotAssertTrait;
 

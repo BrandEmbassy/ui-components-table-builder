@@ -19,51 +19,40 @@ use BrandEmbassy\Components\Table\Ui\Table;
 use BrandEmbassy\Components\UiComponent;
 use BrandEmbassy\Router\UrlGenerator;
 
-final class CrudTableComponentBuilder
+/**
+ * @final
+ */
+class CrudTableComponentBuilder
 {
     private const DEFAULT_QUERY_KEY = 'id';
 
-    /**
-     * @var UrlGenerator
-     */
-    private $urlGenerator;
+    private UrlGenerator $urlGenerator;
 
     /**
      * @var ColumnDefinition[]
      */
-    private $columnDefinition = [];
+    private array $columnDefinition = [];
 
     /**
-     * @var (callable(string $rowIdentifier): Link)[]
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
+     * @var array<callable(string $rowIdentifier): Link>
      */
-    private $linkFactories = [];
+    private array $linkFactories = [];
 
     /**
      * @var string[]
      */
-    private $queryParams = [];
+    private array $queryParams = [];
 
     /**
-     * @var (callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell)[]
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification
+     * @var array<callable(CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell>
      */
-    private $cellRenderCallbacks = [];
+    private array $cellRenderCallbacks = [];
 
-    /**
-     * @var bool
-     */
-    private $hasHover = false;
+    private bool $hasHover = false;
 
-    /**
-     * @var UiComponent|null
-     */
-    private $emptyTableComponent;
+    private ?UiComponent $emptyTableComponent = null;
 
-    /**
-     * @var TableRowDivider|null
-     */
-    private $tableRowDivider;
+    private ?TableRowDivider $tableRowDivider = null;
 
 
     public function __construct(UrlGenerator $urlGenerator)
@@ -169,7 +158,7 @@ final class CrudTableComponentBuilder
         $this->columnDefinition['actions'] = new ColumnDefinition('actions', '', Align::get(Align::RIGHT));
 
         $tableDefinition = new TableDefinition($this->columnDefinition);
-        if ($this->tableRowDivider !== NULL) {
+        if ($this->tableRowDivider !== null) {
             $tableDefinition->setRowDivider($this->tableRowDivider);
         }
         $table = new Table($tableDefinition, $tableDataProvider, $this->hasHover);
@@ -217,8 +206,6 @@ final class CrudTableComponentBuilder
     /**
      * @param callable(string $rowIdentifier): UriInterface $upUrlFactory
      * @param callable(string $rowIdentifier): UriInterface $downUrlFactory
-     * @param bool $isFirstPage
-     * @param bool $isLastPage
      *
      * @return CrudTableComponentBuilder
      */
@@ -257,7 +244,7 @@ final class CrudTableComponentBuilder
                     $children[] = $this->createSpanner();
                 }
 
-            if (!$tableIterator->isLast() || !$isLastPage) {
+                if (!$tableIterator->isLast() || !$isLastPage) {
                     $children[] = new Link(
                         '',
                         $downUrl,
