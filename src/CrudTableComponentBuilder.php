@@ -108,7 +108,7 @@ class CrudTableComponentBuilder
                 'Edit',
                 $this->urlGenerator->pathFor($editRoutePath, $linkQueryParams),
                 LinkColor::get(LinkColor::BLUE),
-                IconType::get(IconType::PENCIL)
+                IconType::get(IconType::PENCIL),
             );
         };
 
@@ -127,7 +127,7 @@ class CrudTableComponentBuilder
                 $this->urlGenerator->pathFor($deleteRoutePath, $linkQueryParams),
                 LinkColor::get(LinkColor::DEFAULT),
                 IconType::get(IconType::TRASH),
-                'return confirm(\'Are you sure you want to remove this item?\')'
+                'return confirm(\'Are you sure you want to remove this item?\')',
             );
         };
 
@@ -166,14 +166,12 @@ class CrudTableComponentBuilder
             'actions',
             function (CellData $cellData, RowData $rowData, ColumnDefinition $columnDefinition): Cell {
                 $links = \array_map(
-                    static function (callable $linkFactory) use ($rowData): UiComponent {
-                        return $linkFactory($rowData->getRowIdentifier(), $rowData);
-                    },
-                    $this->linkFactories
+                    static fn(callable $linkFactory): UiComponent => $linkFactory($rowData->getRowIdentifier(), $rowData),
+                    $this->linkFactories,
                 );
 
                 return new Cell(new LinkList($links), $columnDefinition);
-            }
+            },
         );
 
         foreach ($this->cellRenderCallbacks as $key => $cellRenderCallback) {
@@ -196,7 +194,8 @@ class CrudTableComponentBuilder
         callable $upUrlFactory,
         callable $downUrlFactory,
         bool $isFirstPage = true,
-        bool $isLastPage = true
+        bool $isLastPage = true,
+        bool $withNumberDisplayed = false
     ): self {
         $this->addCellRenderCallback(
             'order',
@@ -209,19 +208,23 @@ class CrudTableComponentBuilder
                 $upUrlFactory,
                 $downUrlFactory,
                 $isFirstPage,
-                $isLastPage
+                $isLastPage,
+                $withNumberDisplayed
             ): Cell {
                 $rowIdentifier = $rowData->getRowIdentifier();
                 $upUrl = $upUrlFactory($rowIdentifier);
                 $downUrl = $downUrlFactory($rowIdentifier);
 
                 $children = [];
+                if ($withNumberDisplayed) {
+                    $children[] = $this->createOrderLabel((string)$cellData->getValue());
+                }
                 if (!$tableIterator->isFirst() || !$isFirstPage) {
                     $children[] = new Link(
                         '',
                         $upUrl,
                         LinkColor::get(LinkColor::BLUE),
-                        IconType::get(IconType::TRIANGLE_UP)
+                        IconType::get(IconType::TRIANGLE_UP),
                     );
                 } else {
                     $children[] = $this->createSpanner();
@@ -232,12 +235,12 @@ class CrudTableComponentBuilder
                         '',
                         $downUrl,
                         LinkColor::get(LinkColor::BLUE),
-                        IconType::get(IconType::TRIANGLE_DOWN)
+                        IconType::get(IconType::TRIANGLE_DOWN),
                     );
                 }
 
                 return new Cell($children, $columnDefinition);
-            }
+            },
         );
 
         return $this;
@@ -251,6 +254,27 @@ class CrudTableComponentBuilder
             public function render(): string
             {
                 return '<div style="display: inline-flex; width: 17px; height: 19px;">&nbsp;</div>';
+            }
+        };
+    }
+
+
+    private function createOrderLabel(string $sortOrder): UiComponent
+    {
+        return new class ($sortOrder) implements UiComponent
+        {
+            private string $sortOrder;
+
+
+            public function __construct(string $sortOrder)
+            {
+                $this->sortOrder = $sortOrder;
+            }
+
+
+            public function render(): string
+            {
+                return '<div style="display: inline-flex; width: 24px; height: 19px;">' . $this->sortOrder . '</div>';
             }
         };
     }

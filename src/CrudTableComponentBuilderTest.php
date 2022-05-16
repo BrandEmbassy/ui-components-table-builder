@@ -37,24 +37,18 @@ class CrudTableComponentBuilderTest extends TestCase
         $builder->addColumn(new ColumnDefinition('yolo', 'Yolo'))
             ->addCellRenderCallback(
                 'name',
-                static function (
+                static fn(
                     CellData $cellData,
                     RowData $rowData,
                     ColumnDefinition $columnDefinition,
                     TableIterator $tableIterator
-                ): Cell {
-                    return new Cell(new Paragraph('Yolo'), $columnDefinition);
-                }
+                ): Cell => new Cell(new Paragraph('Yolo'), $columnDefinition),
             )
             ->addLinkFactory(
-                static function (string $rowIdentifier, RowData $rowData): UiComponent {
-                    return new Link('Link Text', new Uri('https://google.com'));
-                }
+                static fn(string $rowIdentifier, RowData $rowData): UiComponent => new Link('Link Text', new Uri('https://google.com')),
             )
             ->addLinkFactory(
-                static function (string $rowIdentifier, RowData $rowData): UiComponent {
-                    return new EmptyComponent();
-                }
+                static fn(string $rowIdentifier, RowData $rowData): UiComponent => new EmptyComponent(),
             )
             ->addDeleteLink('deleteLink')
             ->addEditLink('editLink');
@@ -105,7 +99,8 @@ class CrudTableComponentBuilderTest extends TestCase
     public function testSortingOfPaginatedTables(
         string $expectedSnapshot,
         bool $isFirstPage,
-        bool $isLastPage
+        bool $isLastPage,
+        bool $withNumberDisplayed
     ): void {
         $urlGenerator = $this->createUrlGeneratorMock();
 
@@ -116,7 +111,8 @@ class CrudTableComponentBuilderTest extends TestCase
             $this->addSortingCallable(1),
             $this->addSortingCallable(-1),
             $isFirstPage,
-            $isLastPage
+            $isLastPage,
+            $withNumberDisplayed,
         );
 
         $rowsData = $this->getRowsDataForSorting();
@@ -136,19 +132,28 @@ class CrudTableComponentBuilderTest extends TestCase
     {
         return [
             'single page' => [
-                'expectedSnapshot' => 'paginationSinglePage.html',
-                'isFirstPage'      => true,
-                'isLastPage'       => true,
+                'expectedSnapshot'    => 'paginationSinglePage.html',
+                'isFirstPage'         => true,
+                'isLastPage'          => true,
+                'withNumberDisplayed' => false,
             ],
             'Middle page' => [
-                'expectedSnapshot' => 'paginationMiddlePage.html',
-                'isFirstPage'      => false,
-                'isLastPage'       => false,
+                'expectedSnapshot'    => 'paginationMiddlePage.html',
+                'isFirstPage'         => false,
+                'isLastPage'          => false,
+                'withNumberDisplayed' => false,
             ],
             'Last page'   => [
-                'expectedSnapshot' => 'paginationLastPage.html',
-                'isFirstPage'      => false,
-                'isLastPage'       => true,
+                'expectedSnapshot'    => 'paginationLastPage.html',
+                'isFirstPage'         => false,
+                'isLastPage'          => true,
+                'withNumberDisplayed' => false,
+            ],
+            'with display number' => [
+                'expectedSnapshot'    => 'withSortNumber.html',
+                'isFirstPage'         => true,
+                'isLastPage'          => true,
+                'withNumberDisplayed' => true,
             ],
         ];
     }
@@ -156,9 +161,7 @@ class CrudTableComponentBuilderTest extends TestCase
 
     private function addSortingCallable(int $direction): callable
     {
-        return static function (string $rowIdentifier) use ($direction): UriInterface {
-            return new Uri(sprintf('someUrl/%s/direction/%d', $rowIdentifier, $direction));
-        };
+        return static fn(string $rowIdentifier): UriInterface => new Uri(sprintf('someUrl/%s/direction/%d', $rowIdentifier, $direction));
     }
 
 
@@ -173,21 +176,21 @@ class CrudTableComponentBuilderTest extends TestCase
                 [
                     'yolo'  => new CellData('row1', 'foo-bar-baz-1'),
                     'order' => new CellData('order', 1),
-                ]
+                ],
             ),
             new RowData(
                 '2',
                 [
                     'yolo'  => new CellData('row2', 'foo-bar-baz-2'),
                     'order' => new CellData('order', 2),
-                ]
+                ],
             ),
             new RowData(
                 '3',
                 [
                     'yolo'  => new CellData('row3', 'foo-bar-baz-3'),
                     'order' => new CellData('order', 3),
-                ]
+                ],
             ),
         ];
     }
