@@ -1,22 +1,27 @@
 <div class="Table__Table Table__isStriped">
-    <table>
+    <table data-cy='Table'>
         <thead>
-        <tr>
-            <th>Yolo</th>
-            <th style="text-align: right;"></th>
+        <tr data-cy='HeaderRow'>
+            <th data-cy='HeaderCell'>Yolo</th>
+            <th style="text-align: right;" data-cy='HeaderCell'></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>foo-bar-baz</td>
-            <td style="text-align: right;">
-                <div class="Linklist__Linklist">
-                    <a class="Link__Link Link" href="https://google.com"><span class="Link__Text">Link Text</span></a>
-                    <a class="Link__Link Link" href="" onclick="return confirm('Are you sure you want to remove this item?')">
-                    <div class="be-icon-trash"></div>
-                    <span class="Link__Text">Delete</span></a><a class="Link__Link Link__Blue" href="">
-                    <div class="be-icon-pencil"></div>
-                    <span class="Link__Text">Edit</span></a>
+        <tr data-cy='Row'>
+            <td data-cy='Cell'>foo-bar-baz</td>
+            <td style="text-align: right;" data-cy='Cell'>
+                <div class="Linklist__Linklist" data-cy='LinkList'>
+                    <a class="Link__Link Link" href="https://google.com" data-cy='Link'>
+                        <span class="Link__Text">Link Text</span>
+                    </a>
+                    <a class="Link__Link Link" href="" onclick="return confirm('Are you sure you want to remove this item?')" data-cy='Link'>
+                        <div class="be-icon-trash" data-cy='Icon-TRASH'></div>
+                        <span class="Link__Text">Delete</span>
+                    </a>
+                    <a class="Link__Link Link__Blue" href="" data-cy='Link'>
+                        <div class="be-icon-pencil" data-cy='Icon-PENCIL'></div>
+                        <span class="Link__Text">Edit</span>
+                    </a>
                 </div>
             </td>
         </tr>

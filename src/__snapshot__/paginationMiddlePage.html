@@ -1,59 +1,47 @@
 <div class="Table__Table Table__isStriped">
-    <table>
+    <table data-cy='Table'>
         <thead>
-        <tr>
-            <th>Yolo</th>
-            <th>Order</th>
-            <th style="text-align: right;"></th>
+        <tr data-cy='HeaderRow'>
+            <th data-cy='HeaderCell'>Yolo</th>
+            <th data-cy='HeaderCell'>Order</th>
+            <th style="text-align: right;" data-cy='HeaderCell'></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>foo-bar-baz-1</td>
-            <td>
-                <a class="Link__Link Link__Blue" href="someUrl/1/direction/1">
-                    <div class="be-icon-triangle-up"></div>
-                    <span class="Link__Text"></span>
-                </a>
-                <a class="Link__Link Link__Blue" href="someUrl/1/direction/-1">
-                    <div class="be-icon-triangle-down"></div>
-                    <span class="Link__Text"></span>
-                </a>
-            </td>
-            <td style="text-align: right;">
-                <div class="Linklist__Linklist"></div>
+        <tr data-cy='Row'>
+            <td data-cy='Cell'>foo-bar-baz-1</td>
+            <td data-cy='Cell'><a class="Link__Link Link__Blue" href="someUrl/1/direction/1" data-cy='Link'>
+                <div class="be-icon-triangle-up" data-cy='Icon-TRIANGLE_UP'></div>
+                <span class="Link__Text"></span></a><a class="Link__Link Link__Blue" href="someUrl/1/direction/-1"
+                                                       data-cy='Link'>
+                <div class="be-icon-triangle-down" data-cy='Icon-TRIANGLE_DOWN'></div>
+                <span class="Link__Text"></span></a></td>
+            <td style="text-align: right;" data-cy='Cell'>
+                <div class="Linklist__Linklist" data-cy='LinkList'></div>
             </td>
         </tr>
-        <tr>
-            <td>foo-bar-baz-2</td>
-            <td>
-                <a class="Link__Link Link__Blue" href="someUrl/2/direction/1">
-                    <div class="be-icon-triangle-up"></div>
-                    <span class="Link__Text"></span>
-                </a>
-                <a class="Link__Link Link__Blue" href="someUrl/2/direction/-1">
-                    <div class="be-icon-triangle-down"></div>
-                    <span class="Link__Text"></span>
-                </a>
-            </td>
-            <td style="text-align: right;">
-                <div class="Linklist__Linklist"></div>
+        <tr data-cy='Row'>
+            <td data-cy='Cell'>foo-bar-baz-2</td>
+            <td data-cy='Cell'><a class="Link__Link Link__Blue" href="someUrl/2/direction/1" data-cy='Link'>
+                <div class="be-icon-triangle-up" data-cy='Icon-TRIANGLE_UP'></div>
+                <span class="Link__Text"></span></a><a class="Link__Link Link__Blue" href="someUrl/2/direction/-1"
+                                                       data-cy='Link'>
+                <div class="be-icon-triangle-down" data-cy='Icon-TRIANGLE_DOWN'></div>
+                <span class="Link__Text"></span></a></td>
+            <td style="text-align: right;" data-cy='Cell'>
+                <div class="Linklist__Linklist" data-cy='LinkList'></div>
             </td>
         </tr>
-        <tr>
-            <td>foo-bar-baz-3</td>
-            <td>
-                <a class="Link__Link Link__Blue" href="someUrl/3/direction/1">
-                    <div class="be-icon-triangle-up"></div>
-                    <span class="Link__Text"></span>
-                </a>
-                <a class="Link__Link Link__Blue" href="someUrl/3/direction/-1">
-                    <div class="be-icon-triangle-down"></div>
-                    <span class="Link__Text"></span>
-                </a>
-            </td>
-            <td style="text-align: right;">
-                <div class="Linklist__Linklist"></div>
+        <tr data-cy='Row'>
+            <td data-cy='Cell'>foo-bar-baz-3</td>
+            <td data-cy='Cell'><a class="Link__Link Link__Blue" href="someUrl/3/direction/1" data-cy='Link'>
+                <div class="be-icon-triangle-up" data-cy='Icon-TRIANGLE_UP'></div>
+                <span class="Link__Text"></span></a><a class="Link__Link Link__Blue" href="someUrl/3/direction/-1"
+                                                       data-cy='Link'>
+                <div class="be-icon-triangle-down" data-cy='Icon-TRIANGLE_DOWN'></div>
+                <span class="Link__Text"></span></a></td>
+            <td style="text-align: right;" data-cy='Cell'>
+                <div class="Linklist__Linklist" data-cy='LinkList'></div>
             </td>
         </tr>
         </tbody>
