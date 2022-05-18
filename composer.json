@@ -9,7 +9,7 @@
   "require": {
     "php": ">=7.4",
     "brandembassy/php-router": "^1.1",
-    "brandembassy/ui-components": "^5.1",
+    "brandembassy/ui-components": "^6.0",
     "guzzlehttp/psr7": "^1.5"
   },
   "require-dev": {
