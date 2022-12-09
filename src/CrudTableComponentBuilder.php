@@ -42,6 +42,11 @@ class CrudTableComponentBuilder
     /**
      * @var string[]
      */
+    private array $params = [];
+
+    /**
+     * @var string[]
+     */
     private array $queryParams = [];
 
     /**
@@ -90,6 +95,14 @@ class CrudTableComponentBuilder
     }
 
 
+    public function addParam(string $key, string $value): self
+    {
+        $this->params[$key] = $value;
+
+        return $this;
+    }
+
+
     public function addQueryParam(string $key, string $value): self
     {
         $this->queryParams[$key] = $value;
@@ -101,12 +114,12 @@ class CrudTableComponentBuilder
     public function addEditLink(string $editRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY): self
     {
         $this->linkFactories[] = function (string $rowIdentifier) use ($editRoutePath, $keyQueryName): Link {
-            $linkQueryParams = $this->queryParams;
-            $linkQueryParams[$keyQueryName] = $rowIdentifier;
+            $params = $this->params;
+            $params[$keyQueryName] = $rowIdentifier;
 
             return new Link(
                 'Edit',
-                $this->urlGenerator->pathFor($editRoutePath, $linkQueryParams),
+                $this->urlGenerator->pathFor($editRoutePath, $params, $this->queryParams),
                 LinkColor::get(LinkColor::BLUE),
                 IconType::get(IconType::PENCIL),
             );
@@ -119,12 +132,12 @@ class CrudTableComponentBuilder
     public function addDeleteLink(string $deleteRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY): self
     {
         $this->linkFactories[] = function (string $rowIdentifier) use ($deleteRoutePath, $keyQueryName): Link {
-            $linkQueryParams = $this->queryParams;
-            $linkQueryParams[$keyQueryName] = $rowIdentifier;
+            $params = $this->params;
+            $params[$keyQueryName] = $rowIdentifier;
 
             return new Link(
                 'Delete',
-                $this->urlGenerator->pathFor($deleteRoutePath, $linkQueryParams),
+                $this->urlGenerator->pathFor($deleteRoutePath, $params, $this->queryParams),
                 LinkColor::get(LinkColor::DEFAULT),
                 IconType::get(IconType::TRASH),
                 'return confirm(\'Are you sure you want to remove this item?\')',
