@@ -197,7 +197,7 @@ class CrudTableComponentBuilderTest extends TestCase
 
 
     /**
-     * @return MockInterface&UrlGenerator
+     * @return UrlGenerator&MockInterface
      */
     public function createUrlGeneratorMock(): UrlGenerator
     {
