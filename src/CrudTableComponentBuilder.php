@@ -6,6 +6,7 @@ use BrandEmbassy\Components\Align;
 use BrandEmbassy\Components\Controls\Link\Link;
 use BrandEmbassy\Components\Controls\Link\LinkColor;
 use BrandEmbassy\Components\Controls\Link\LinkList;
+use BrandEmbassy\Components\Controls\Link\LinkTarget;
 use BrandEmbassy\Components\Icon\IconType;
 use BrandEmbassy\Components\Table\Model\CellData;
 use BrandEmbassy\Components\Table\Model\ColumnDefinition;
@@ -111,9 +112,9 @@ class CrudTableComponentBuilder
     }
 
 
-    public function addEditLink(string $editRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY): self
+    public function addEditLink(string $editRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY, ?LinkTarget $target = null): self
     {
-        $this->linkFactories[] = function (string $rowIdentifier) use ($editRoutePath, $keyQueryName): Link {
+        $this->linkFactories[] = function (string $rowIdentifier) use ($editRoutePath, $keyQueryName, $target): Link {
             $params = $this->params;
             $params[$keyQueryName] = $rowIdentifier;
 
@@ -122,6 +123,8 @@ class CrudTableComponentBuilder
                 $this->urlGenerator->pathFor($editRoutePath, $params, $this->queryParams),
                 LinkColor::get(LinkColor::BLUE),
                 IconType::get(IconType::PENCIL),
+                null,
+                $target,
             );
         };
 
@@ -129,9 +132,9 @@ class CrudTableComponentBuilder
     }
 
 
-    public function addDeleteLink(string $deleteRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY): self
+    public function addDeleteLink(string $deleteRoutePath, string $keyQueryName = self::DEFAULT_QUERY_KEY, ?LinkTarget $target = null): self
     {
-        $this->linkFactories[] = function (string $rowIdentifier) use ($deleteRoutePath, $keyQueryName): Link {
+        $this->linkFactories[] = function (string $rowIdentifier) use ($deleteRoutePath, $keyQueryName, $target): Link {
             $params = $this->params;
             $params[$keyQueryName] = $rowIdentifier;
 
@@ -141,6 +144,7 @@ class CrudTableComponentBuilder
                 LinkColor::get(LinkColor::DEFAULT),
                 IconType::get(IconType::TRASH),
                 'return confirm(\'Are you sure you want to remove this item?\')',
+                $target,
             );
         };
 
