@@ -9,11 +9,11 @@
   "require": {
     "php": ">=7.4",
     "brandembassy/php-router": "^1.1",
-    "brandembassy/ui-components": "^6.0",
-    "guzzlehttp/psr7": "^1.5"
+    "brandembassy/ui-components": "^6.0"
   },
   "require-dev": {
     "brandembassy/coding-standard": "^8.6",
+    "guzzlehttp/psr7": "^2.6",
     "mockery/mockery": "^1.3",
     "phpunit/phpunit": "^8",
     "roave/security-advisories": "dev-master"
@@ -24,6 +24,20 @@
     "phpstan": "./vendor/bin/phpstan analyse src",
     "test": "./vendor/bin/phpunit src"
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/BrandEmbassy/php-router"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/BrandEmbassy/ui-components"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/BrandEmbassy/coding-standard"
+    }
+  ],
   "config": {
     "sort-packages": true,
     "process-timeout": 600,
